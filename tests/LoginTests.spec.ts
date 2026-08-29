@@ -18,24 +18,22 @@ test.describe("Login Page Tests", () => {
     //ٰValidations
     await common.expectTitle(URLS.title);
     await common.expectVisible(login.usernameInput);
+    await common.expectEnabled(login.usernameInput);
     await common.expectVisible(login.passwordInput);
+    await common.expectEnabled(login.passwordInput);
     await common.expectEnabled(login.loginButton);
   });
 
-  test(
-    "1-succeessful login",
-    { tag: ["@smoke", "@critical", "@regression"] },
-    async () => {
-      await common.fill(login.usernameInput, USERS.standard.username);
-      await common.fill(login.passwordInput, USERS.standard.password);
+  test("1-succeessful login", { tag: ["@regression", "@smoke"] }, async () => {
+    await common.fill(login.usernameInput, USERS.standard.username);
+    await common.fill(login.passwordInput, USERS.standard.password);
 
-      await common.expectValue(login.usernameInput, USERS.standard.username);
-      await common.expectValue(login.passwordInput, USERS.standard.password);
+    await common.expectValue(login.usernameInput, USERS.standard.username);
+    await common.expectValue(login.passwordInput, USERS.standard.password);
 
-      await common.click(login.loginButton);
-      await common.expectUrl(URLS.inventory);
-    },
-  );
+    await common.click(login.loginButton);
+    await common.expectUrl(URLS.inventory);
+  });
 
   test("2-wrong username", { tag: ["@regression", "@smoke"] }, async () => {
     await common.fill(login.usernameInput, USERS.wrongUser.username);
