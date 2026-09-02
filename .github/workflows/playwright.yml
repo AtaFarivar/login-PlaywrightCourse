@@ -28,6 +28,11 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Playwright tests
+        env:
+          STANDARD_USERNAME: ${{ secrets.STANDARD_USERNAME }}
+          STANDARD_PASSWORD: ${{ secrets.STANDARD_PASSWORD }}
+          WRONG_USERNAME: ${{ secrets.WRONG_USERNAME }}
+          WRONG_PASSWORD: ${{ secrets.WRONG_PASSWORD }}
         run: npx playwright test
         continue-on-error: true
 
